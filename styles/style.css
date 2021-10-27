@@ -1,0 +1,47 @@
+.myGameArea {
+  height: 512px;
+  width: 1000px;
+  border: 2px solid black;
+  position: relative;
+  left: 10%;
+  top: 30px;
+  background-image: url("../images/background.png");
+  overflow: hidden;
+}
+.myGameArea #upTower {
+  width: 50px;
+  height: 300px;
+  position: absolute;
+  left: 950px;
+  background: green;
+}
+.myGameArea #downTower {
+  width: 50px;
+  height: 130px;
+  position: absolute;
+  left: 800px;
+  bottom: 0px;
+  background: green;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+.button__element {
+  color: white;
+  background-color: green;
+  border: 2px solid green;
+  margin: 2px;
+  padding: 2px;
+  width: 100px;
+}
+
+#myBird {
+  width: 120px;
+  height: auto;
+  position: absolute;
+  top: 200px;
+}

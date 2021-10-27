@@ -1,0 +1,46 @@
+.myGameArea{
+    height: 512px;
+    width: 1000px;
+    border: 2px solid black;
+    position: relative;
+    left: 10%;
+    top: 30px;
+    background-image: url('../images/background.png');
+    overflow: hidden;
+
+    // #myBird{
+    //     height: 10px;
+    //     width: 10px;
+    // }
+
+    #upTower{
+        width: 50px;
+        height: 300px;
+        position: absolute;
+        left: 950px;
+        background: green;
+        // animation: upTower 5s infinite linear;
+    }
+
+    // @keyframes upTower {
+    //     0%{left: 1000px}
+    //     100%{left:-50px}
+    // }
+
+    #downTower{
+        width: 50px;
+        height: 130px;
+        position: absolute;
+        left: 800px;
+        bottom: 0px;
+        background: green;
+        // animation: downTower 5s infinite linear;
+    }
+
+    // @keyframes downTower {
+    //     0%{left: 1000px}
+    //     100%{left:-50px}
+    // }
+
+
+}
