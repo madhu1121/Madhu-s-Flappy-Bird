@@ -4,8 +4,10 @@ var upTower = document.getElementById("upTower");
 var downTower = document.getElementById("downTower");
 var gameArea = document.getElementById("myGameArea");
 var bird = document.getElementById("myBird");
+var scoreBoard = document.getElementById("score__placeholder");
 var leftPosition = 950;
-var gameID; //generating random height of div
+var gameID;
+var counter = 0; //generating random height of div
 
 var loadGame = function loadGame() {
   var snd = new Audio("../images/retro.wav"); // buffers automatically when created
@@ -20,7 +22,11 @@ var loadGame = function loadGame() {
 
   if (leftPosition < 50) {
     leftPosition = 950;
-  } // let diveleUp = document.createElement("div");
+  }
+
+  counter = counter + 100;
+  scoreBoard.innerHTML = counter;
+  collision(); // let diveleUp = document.createElement("div");
   // diveleUp.className = "upTower";
   // diveleUp.style.cssText = 'width: 50px;position: absolute;left: 950px;background: green;';
   // gameArea.appendChild(diveleUp);
@@ -35,10 +41,9 @@ var loadGame = function loadGame() {
   // diveledown.style.height = Math.random() * 200 + 'px';
   // diveledown.className = "downTower";
 
-
   gameID = setTimeout(function () {
     window.requestAnimationFrame(loadGame);
-  }, 400); //gameID = window.requestAnimationFrame(loadGame);
+  }, 400); // gameID = window.requestAnimationFrame(loadGame);
 };
 
 var startGame = function startGame() {
@@ -72,8 +77,20 @@ bird.addEventListener('keydown', function (event) {
       style.top = "".concat(parseInt(bird.style.left) + 5, "px");
       break;
   }
-}); // const log = document.getElementById('log');
-// document.addEventListener('keydown', logKey);
-// function logKey(e) {
-//   log.textContent += ` ${e.code}`;
-// }
+});
+
+var collision = function collision() {
+  var rectBird = bird.getBoundingClientRect();
+  console.log("Bird is", rectBird);
+  var rectUpTower = upTower.getBoundingClientRect();
+  console.log("Uptower is", rectUpTower);
+  var rectDownTower = downTower.getBoundingClientRect();
+  console.log("DownTower is", rectDownTower);
+
+  if (rectBird.right == rectUpTower.x) {
+    alert("Game Over!");
+  } // if ((rectBird.right == rectUpTower.x || rectBird.right == rectDownTower.x) && (rectBird.y == rectUpTower.bottom) && (rectBird.bottom == rectDownTower.top)){
+  //     alert("Game Over!");
+  // }
+
+};

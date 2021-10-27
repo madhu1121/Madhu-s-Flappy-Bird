@@ -14,6 +14,7 @@
   position: absolute;
   left: 950px;
   background: green;
+  border-radius: 5px;
 }
 .myGameArea #downTower {
   width: 50px;
@@ -22,6 +23,7 @@
   left: 800px;
   bottom: 0px;
   background: green;
+  border-radius: 5px;
 }
 
 .button {

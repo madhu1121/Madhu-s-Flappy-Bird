@@ -2,9 +2,11 @@ const upTower = document.getElementById("upTower");
 const downTower = document.getElementById("downTower");
 const gameArea = document.getElementById("myGameArea");
 const bird = document.getElementById("myBird");
+const scoreBoard = document.getElementById("score__placeholder");
 
 let leftPosition = 950;
 let gameID;
+let counter = 0;
 //generating random height of div
 
 
@@ -27,6 +29,12 @@ const loadGame = () => {
         leftPosition = 950;
     }
 
+    
+    counter = counter+100;
+
+    scoreBoard.innerHTML = counter;
+    collision();
+
     // let diveleUp = document.createElement("div");
     // diveleUp.className = "upTower";
     // diveleUp.style.cssText = 'width: 50px;position: absolute;left: 950px;background: green;';
@@ -46,7 +54,9 @@ const loadGame = () => {
     gameID = setTimeout(() => {
         window.requestAnimationFrame(loadGame);
     }, 400);
-    //gameID = window.requestAnimationFrame(loadGame);
+
+    
+    // gameID = window.requestAnimationFrame(loadGame);
 }
 
 const startGame = () => {
@@ -81,10 +91,21 @@ bird.addEventListener('keydown', (event) => {
 })
 
 
-// const log = document.getElementById('log');
+const collision = () => {
+    let rectBird = bird.getBoundingClientRect();
+    console.log("Bird is" , rectBird);
 
-// document.addEventListener('keydown', logKey);
+    let rectUpTower = upTower.getBoundingClientRect();
+    console.log("Uptower is" , rectUpTower);
+    let rectDownTower = downTower.getBoundingClientRect();
+    console.log("DownTower is" , rectDownTower);
 
-// function logKey(e) {
-//   log.textContent += ` ${e.code}`;
-// }
+    if (rectBird.right == rectUpTower.x ){
+        alert("Game Over!");
+    }
+
+    // if ((rectBird.right == rectUpTower.x || rectBird.right == rectDownTower.x) && (rectBird.y == rectUpTower.bottom) && (rectBird.bottom == rectDownTower.top)){
+    //     alert("Game Over!");
+    // }
+}
+
