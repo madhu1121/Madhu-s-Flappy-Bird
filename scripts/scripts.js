@@ -7,12 +7,40 @@ const scoreBoard = document.getElementById("score__placeholder");
 let leftPosition = 950;
 let gameID;
 let counter = 0;
+let birdCordinates;
+let upTowerCordinates;
+let downTowerCordinates;
 
 
 //generating random height of div
 const loadGame = () => {
     let gameSound = new Audio("../images/retro.wav");
     gameSound.play();
+
+        //120 is bird's width. Divide it by 2 to get mid width
+        //512 is game area
+        birdCordinates = {
+            x: bird.getBoundingClientRect().left,
+            y: bird.getBoundingClientRect().top,
+            center_x: bird.getBoundingClientRect().left + 120 / 2,
+            down_y: 512 - bird.getBoundingClientRect().top 
+        }
+    
+        console.log("birdCordinates", birdCordinates);
+    
+        upTowerCordinates = {
+            x: upTower.getBoundingClientRect().left,
+            y: upTower.getBoundingClientRect().bottom,
+        }
+    
+        console.log("upTowerCordinates", upTowerCordinates);
+    
+        downTowerCordinates = {
+            x: downTower.getBoundingClientRect().left,
+            y: downTower.getBoundingClientRect().top,
+        }
+    
+    console.log("downTowerCordinates", downTowerCordinates);
 
 
     leftPosition = leftPosition - 50;
@@ -76,6 +104,42 @@ const stopGame = () => {
     counter = 0;
 }
 
+const replay = () => {
+    window.location.reload();
+    loadGame();
+}
+
+
+
+
+
+// const moveBird = () => {
+//     window.addEventListener('keydown', (event) => {
+//         const { style } = bird;
+//         console.log("style", style);
+//         switch (event.code) {
+//             case 'ArrowUp':
+//                 // birdCordinates.y = birdCordinates.y - 5;
+//                 console.log(`hee is my ${birdCordinates.y - 5}px`);
+//                 style.top = `${birdCordinates.y - 5}px`;
+//                 console.log("style.top" + style.top);
+//                 break;
+//             case 'ArrowDown':
+//                 // birdCordinates.y = birdCordinates.y + 5;
+//                 style.top = `${birdCordinates.y + 5}px`;
+//                 break;
+//             case 'ArrowLeft':
+//                 birdCordinates.x = birdCordinates.x - 5;
+//                 style.left = `${birdCordinates.x}px`;
+//                 break;
+//             case 'ArrowRight':
+//                 birdCordinates.x = birdCordinates.x + 5;
+//                 style.left = `${birdCordinates.x}px`;
+//                 break;
+//         }
+//     })
+// }
+
 const moveBird = () => {
     window.addEventListener('keydown', (event) => {
         const { style } = bird;
@@ -100,23 +164,40 @@ const moveBird = () => {
 
 
 const collision = () => {
-    let rectBird = bird.getBoundingClientRect();
-    console.log("Bird is", rectBird);
+    // let rectBird = bird.getBoundingClientRect();
+    // console.log("Bird is", rectBird);
 
-    let rectUpTower = upTower.getBoundingClientRect();
-    console.log("Uptower is", rectUpTower);
-    let rectDownTower = downTower.getBoundingClientRect();
-    console.log("DownTower is", rectDownTower);
+    // let rectUpTower = upTower.getBoundingClientRect();
+    // console.log("Uptower is", rectUpTower);
+    // let rectDownTower = downTower.getBoundingClientRect();
+    // console.log("DownTower is", rectDownTower);
 
-    console.log("rectBird.right - rectUpTower.left", rectBird.right - rectUpTower.left);
-    console.log("rectUpTower.bottom - rectBird.top", rectUpTower.bottom - rectBird.top);
+    // let x_collide = rectBird.right - rectUpTower.left;
+    // let y_collide = rectUpTower.bottom - rectBird.top;
 
-    if (rectBird.left < 105 || rectBird.left > 1000 || rectBird.top < 80 || rectBird.top > 500 ) {
+    // console.log("x_collide", x_collide);
+    // console.log("y_collide", y_collide);
+
+    console.log("diff y", upTowerCordinates.y - birdCordinates.down_y);
+    console.log("diff x", birdCordinates.center_x - upTowerCordinates.x);
+    //birdCordinates.center_x - upTowerCordinates.x <= 50 && birdCordinates.center_x - upTowerCordinates.x >= -50 && 
+
+    if ((birdCordinates.center_x - upTowerCordinates.x <= 50 && birdCordinates.center_x - upTowerCordinates.x >= -50 && upTowerCordinates.y - birdCordinates.down_y <= 3 && upTowerCordinates.y - birdCordinates.down_y >= -3) || birdCordinates.x < 105 || birdCordinates.x > 1000 || birdCordinates.y < 80 || birdCordinates.y > 500) {
+        console.log("here is my collide");
         console.log("GAME OVER! SCORE IS : " + counter);
-        alert("Your Score is : " + counter )
+        alert("Your Score is : " + counter)
         location.href = 'http://127.0.0.1:5500/index.html';
         counter = 0;
     }
+
+
+    // if (rectBird.left < 105 || rectBird.left > 1000 || rectBird.top < 80 || rectBird.top > 500 || ((x_collide <= 50 && x_collide >= -50) && y_collide <= 10 && y_collide >= -10) ) {
+    //         console.log("here is my collide");
+    //     console.log("GAME OVER! SCORE IS : " + counter);
+    //     alert("Your Score is : " + counter )
+    //     location.href = 'http://127.0.0.1:5500/index.html';
+    //     counter = 0;
+    // }
 
     // if ((rectBird.right == rectUpTower.x || rectBird.right == rectDownTower.x) && (rectBird.y == rectUpTower.bottom) && (rectBird.bottom == rectDownTower.top)){
     //     alert("Game Over!");
