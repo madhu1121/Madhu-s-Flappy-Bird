@@ -10,8 +10,8 @@ var gameID;
 var counter = 0; //generating random height of div
 
 var loadGame = function loadGame() {
-  var snd = new Audio("../images/retro.wav");
-  snd.play();
+  var gameSound = new Audio("../images/retro.wav");
+  gameSound.play();
   leftPosition = leftPosition - 50;
   upTower.style.left = "".concat(leftPosition, "px");
   upTower.style.height = "".concat(Math.random() * 300, "px");
@@ -40,9 +40,11 @@ var loadGame = function loadGame() {
   // diveledown.style.height = Math.random() * 200 + 'px';
   // diveledown.className = "downTower";
 
-  setTimeout(function () {
+  gameID = setTimeout(function () {
     window.requestAnimationFrame(loadGame);
-  }, 400); //gameID = window.requestAnimationFrame(loadGame);
+  }, 400);
+  console.log("gameID" + gameID); // return gameID;
+  //gameID = window.requestAnimationFrame(loadGame);
 }; // const startGame = () => {
 //     gameID = window.requestAnimationFrame(loadGame);
 //     console.log("Game Start");
@@ -50,11 +52,13 @@ var loadGame = function loadGame() {
 
 
 var stopGame = function stopGame() {
-  setTimeout(function () {
-    gameID = window.requestAnimationFrame(loadGame);
-    cancelAnimationFrame(gameID);
-  }, 400); // cancelAnimationFrame(gameID);
-
+  // setTimeout(() => {
+  //     gameID = window.requestAnimationFrame(loadGame);
+  //     cancelAnimationFrame(gameID);
+  // }, 400);
+  // cancelAnimationFrame(gameID);
+  console.log("stop one", gameID);
+  clearTimeout(gameID);
   console.log("Game Stopped");
   counter = 0;
 };
@@ -91,9 +95,14 @@ var collision = function collision() {
   console.log("Uptower is", rectUpTower);
   var rectDownTower = downTower.getBoundingClientRect();
   console.log("DownTower is", rectDownTower);
+  console.log("rectBird.right - rectUpTower.left", rectBird.right - rectUpTower.left);
+  console.log("rectUpTower.bottom - rectBird.top", rectUpTower.bottom - rectBird.top);
 
-  if (rectBird.right == rectUpTower.x) {
-    alert("Game Over!");
+  if (rectBird.left < 105 || rectBird.left > 1000 || rectBird.top < 80 || rectBird.top > 500) {
+    console.log("GAME OVER! SCORE IS : " + counter);
+    alert("Your Score is : " + counter);
+    location.href = 'http://127.0.0.1:5500/index.html';
+    counter = 0;
   } // if ((rectBird.right == rectUpTower.x || rectBird.right == rectDownTower.x) && (rectBird.y == rectUpTower.bottom) && (rectBird.bottom == rectDownTower.top)){
   //     alert("Game Over!");
   // }

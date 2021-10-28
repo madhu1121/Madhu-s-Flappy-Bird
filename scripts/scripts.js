@@ -11,8 +11,8 @@ let counter = 0;
 
 //generating random height of div
 const loadGame = () => {
-    var snd = new Audio("../images/retro.wav");
-    snd.play();
+    let gameSound = new Audio("../images/retro.wav");
+    gameSound.play();
 
 
     leftPosition = leftPosition - 50;
@@ -27,8 +27,8 @@ const loadGame = () => {
         leftPosition = 950;
     }
 
-    
-    counter = counter+50;
+
+    counter = counter + 50;
 
     scoreBoard.innerHTML = counter;
     collision();
@@ -49,11 +49,12 @@ const loadGame = () => {
     // diveledown.style.height = Math.random() * 200 + 'px';
     // diveledown.className = "downTower";
 
-    setTimeout(() => {
-         window.requestAnimationFrame(loadGame);
-         }, 400);
+    gameID = setTimeout(() => {
+        window.requestAnimationFrame(loadGame);
+    }, 400);
 
-    
+    console.log("gameID" + gameID);
+    // return gameID;
     //gameID = window.requestAnimationFrame(loadGame);
 }
 
@@ -64,11 +65,13 @@ const loadGame = () => {
 
 
 const stopGame = () => {
-    setTimeout(() => {
-        gameID = window.requestAnimationFrame(loadGame);
-        cancelAnimationFrame(gameID);
-    }, 400);
+    // setTimeout(() => {
+    //     gameID = window.requestAnimationFrame(loadGame);
+    //     cancelAnimationFrame(gameID);
+    // }, 400);
     // cancelAnimationFrame(gameID);
+    console.log("stop one", gameID);
+    clearTimeout(gameID);
     console.log("Game Stopped");
     counter = 0;
 }
@@ -98,19 +101,31 @@ const moveBird = () => {
 
 const collision = () => {
     let rectBird = bird.getBoundingClientRect();
-    console.log("Bird is" , rectBird);
+    console.log("Bird is", rectBird);
 
     let rectUpTower = upTower.getBoundingClientRect();
-    console.log("Uptower is" , rectUpTower);
+    console.log("Uptower is", rectUpTower);
     let rectDownTower = downTower.getBoundingClientRect();
-    console.log("DownTower is" , rectDownTower);
+    console.log("DownTower is", rectDownTower);
 
-    if (rectBird.right == rectUpTower.x ){
-        alert("Game Over!");
+    console.log("rectBird.right - rectUpTower.left", rectBird.right - rectUpTower.left);
+    console.log("rectUpTower.bottom - rectBird.top", rectUpTower.bottom - rectBird.top);
+
+    if (rectBird.left < 105 || rectBird.left > 1000 || rectBird.top < 80 || rectBird.top > 500 ) {
+        console.log("GAME OVER! SCORE IS : " + counter);
+        alert("Your Score is : " + counter )
+        location.href = 'http://127.0.0.1:5500/index.html';
+        counter = 0;
     }
 
     // if ((rectBird.right == rectUpTower.x || rectBird.right == rectDownTower.x) && (rectBird.y == rectUpTower.bottom) && (rectBird.bottom == rectDownTower.top)){
     //     alert("Game Over!");
     // }
 }
+
+
+
+
+
+
 
