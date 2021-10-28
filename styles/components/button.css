@@ -6,12 +6,9 @@
 }
 .button__element {
   color: white;
-  background-color: green;
-  border: 2px solid green;
+  background-color: orange;
+  border: 2px solid orange;
   margin: 2px;
   padding: 2px;
   width: 100px;
-}
-.button .score {
-  background-color: rgba(247, 7, 247, 0.829);
 }

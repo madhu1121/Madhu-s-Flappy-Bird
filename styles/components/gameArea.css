@@ -1,10 +1,14 @@
+body {
+  background-color: #2e2929;
+}
+
 .myGameArea {
   height: 512px;
   width: 1000px;
   border: 2px solid black;
   position: relative;
   left: 10%;
-  top: 30px;
+  top: 3px;
   background-image: url("../images/background.png");
   overflow: hidden;
 }

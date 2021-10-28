@@ -1,10 +1,14 @@
+body {
+  background-color: #2e2929;
+}
+
 .myGameArea {
   height: 512px;
   width: 1000px;
   border: 2px solid black;
   position: relative;
   left: 10%;
-  top: 30px;
+  top: 3px;
   background-image: url("../images/background.png");
   overflow: hidden;
 }
@@ -34,16 +38,28 @@
 }
 .button__element {
   color: white;
-  background-color: green;
-  border: 2px solid green;
+  background-color: orange;
+  border: 2px solid orange;
   margin: 2px;
   padding: 2px;
   width: 100px;
 }
+
 #myBird {
   width: 120px;
   height: auto;
   position: absolute;
   top: 200px;
   left: 30px;
+}
+
+.score {
+  background-color: green;
+  color: white;
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
 }

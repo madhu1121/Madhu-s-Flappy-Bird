@@ -5,17 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flappy Bird</title>
-    <link rel="stylesheet" href="styles\style.css">
+    <link rel="stylesheet" href=".\styles\style.css">
+    <script src="https://kit.fontawesome.com/087f778dd4.js" crossorigin="anonymous"></script>
 </head>
 
 <body onload="moveBird()">
 
     <div class="button"> 
-        <button class="button__element" id="playButton" onclick="loadGame()">START</button>
-        <button class="button__element" id="stopButton" onclick="stopGame()">STOP</button>
-        <div class="score">SCORE :
-            <p class="score__placeholder" id="score__placeholder"> </p>
-        </div>
+        <button class="button__element" id="playButton" onclick="loadGame()">
+            <i class="fas fa-play"></i>
+        </button>
+        <button class="button__element" id="stopButton" onclick="stopGame()">
+            <i class="fas fa-pause"></i>
+        </button>
+        <button class="button__element" id="stopButton" onclick="replay()">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+    </div>
+
+    <div class="score">
+        <p class="score__score" id="score__score">SCORE :</p>
+        <p class="score__placeholder" id="score__placeholder"> </p>
     </div>
 
     <section class="myGameArea" id="myGameArea">
