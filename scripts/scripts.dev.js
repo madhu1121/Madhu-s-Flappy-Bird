@@ -10,8 +10,7 @@ var gameID;
 var counter = 0; //generating random height of div
 
 var loadGame = function loadGame() {
-  var snd = new Audio("../images/retro.wav"); // buffers automatically when created
-
+  var snd = new Audio("../images/retro.wav");
   snd.play();
   leftPosition = leftPosition - 50;
   upTower.style.left = "".concat(leftPosition, "px");
@@ -24,7 +23,7 @@ var loadGame = function loadGame() {
     leftPosition = 950;
   }
 
-  counter = counter + 100;
+  counter = counter + 50;
   scoreBoard.innerHTML = counter;
   collision(); // let diveleUp = document.createElement("div");
   // diveleUp.className = "upTower";
@@ -41,43 +40,49 @@ var loadGame = function loadGame() {
   // diveledown.style.height = Math.random() * 200 + 'px';
   // diveledown.className = "downTower";
 
-  gameID = setTimeout(function () {
+  setTimeout(function () {
     window.requestAnimationFrame(loadGame);
-  }, 400); // gameID = window.requestAnimationFrame(loadGame);
-};
+  }, 400); //gameID = window.requestAnimationFrame(loadGame);
+}; // const startGame = () => {
+//     gameID = window.requestAnimationFrame(loadGame);
+//     console.log("Game Start");
+// }
 
-var startGame = function startGame() {
-  gameID = window.requestAnimationFrame(loadGame);
-  console.log("Game Start");
-};
 
 var stopGame = function stopGame() {
-  cancelAnimationFrame(gameID);
+  setTimeout(function () {
+    gameID = window.requestAnimationFrame(loadGame);
+    cancelAnimationFrame(gameID);
+  }, 400); // cancelAnimationFrame(gameID);
+
   console.log("Game Stopped");
+  counter = 0;
 };
 
-bird.addEventListener('keydown', function (event) {
-  //const { style } = bird;
-  console.log("here is :", style);
+var moveBird = function moveBird() {
+  window.addEventListener('keydown', function (event) {
+    var style = bird.style;
+    console.log("here is :", window.getComputedStyle(bird).left);
 
-  switch (event.code) {
-    case 'ArrowUp':
-      style.top = "".concat(parseInt(bird.style.top) - 5, "px");
-      break;
+    switch (event.code) {
+      case 'ArrowUp':
+        style.top = "".concat(parseInt(window.getComputedStyle(bird).top) - 5, "px");
+        break;
 
-    case 'ArrowDown':
-      style.top = "".concat(parseInt(bird.style.top) + 5, "px");
-      break;
+      case 'ArrowDown':
+        style.top = "".concat(parseInt(window.getComputedStyle(bird).top) + 5, "px");
+        break;
 
-    case 'ArrowLeft':
-      style.top = "".concat(parseInt(bird.style.left) - 5, "px");
-      break;
+      case 'ArrowLeft':
+        style.left = "".concat(parseInt(window.getComputedStyle(bird).left) - 5, "px");
+        break;
 
-    case 'ArrowRight':
-      style.top = "".concat(parseInt(bird.style.left) + 5, "px");
-      break;
-  }
-});
+      case 'ArrowRight':
+        style.left = "".concat(parseInt(window.getComputedStyle(bird).left) + 5, "px");
+        break;
+    }
+  });
+};
 
 var collision = function collision() {
   var rectBird = bird.getBoundingClientRect();

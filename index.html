@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="styles\style.css">
 </head>
 
-<body>
-    <div class="button"> 
-        <button class="button__element" id="playButton" onclick="startGame()">START</button>
-        <button class="button__element" id="stopButton" onclick="stopGame()">STOP</button>
-    </div>
+<body onload="moveBird()">
 
-    <div class="score">Score :
-        <p class="score__placeholder" id="score__placeholder"> </p>
+    <div class="button"> 
+        <button class="button__element" id="playButton" onclick="loadGame()">START</button>
+        <button class="button__element" id="stopButton" onclick="stopGame()">STOP</button>
+        <div class="score">SCORE :
+            <p class="score__placeholder" id="score__placeholder"> </p>
+        </div>
     </div>
 
     <section class="myGameArea" id="myGameArea">
 
+
         <img id="myBird" src="images\5.gif" alt="flappy bird"/>
 
-        
         <div id="upTower">
         </div>
         <div id="downTower">

@@ -7,14 +7,12 @@ const scoreBoard = document.getElementById("score__placeholder");
 let leftPosition = 950;
 let gameID;
 let counter = 0;
+
+
 //generating random height of div
-
-
-
 const loadGame = () => {
-    var snd = new Audio("../images/retro.wav"); // buffers automatically when created
+    var snd = new Audio("../images/retro.wav");
     snd.play();
-
 
 
     leftPosition = leftPosition - 50;
@@ -30,7 +28,7 @@ const loadGame = () => {
     }
 
     
-    counter = counter+100;
+    counter = counter+50;
 
     scoreBoard.innerHTML = counter;
     collision();
@@ -51,44 +49,51 @@ const loadGame = () => {
     // diveledown.style.height = Math.random() * 200 + 'px';
     // diveledown.className = "downTower";
 
-    gameID = setTimeout(() => {
-        window.requestAnimationFrame(loadGame);
-    }, 400);
+    setTimeout(() => {
+         window.requestAnimationFrame(loadGame);
+         }, 400);
 
     
-    // gameID = window.requestAnimationFrame(loadGame);
+    //gameID = window.requestAnimationFrame(loadGame);
 }
 
-const startGame = () => {
-    gameID = window.requestAnimationFrame(loadGame);
-    console.log("Game Start");
-}
+// const startGame = () => {
+//     gameID = window.requestAnimationFrame(loadGame);
+//     console.log("Game Start");
+// }
 
 
 const stopGame = () => {
-    cancelAnimationFrame(gameID);
+    setTimeout(() => {
+        gameID = window.requestAnimationFrame(loadGame);
+        cancelAnimationFrame(gameID);
+    }, 400);
+    // cancelAnimationFrame(gameID);
     console.log("Game Stopped");
+    counter = 0;
 }
 
+const moveBird = () => {
+    window.addEventListener('keydown', (event) => {
+        const { style } = bird;
+        console.log("here is :", window.getComputedStyle(bird).left);
+        switch (event.code) {
+            case 'ArrowUp':
+                style.top = `${parseInt(window.getComputedStyle(bird).top) - 5}px`;
+                break;
+            case 'ArrowDown':
+                style.top = `${parseInt(window.getComputedStyle(bird).top) + 5}px`;
+                break;
+            case 'ArrowLeft':
+                style.left = `${parseInt(window.getComputedStyle(bird).left) - 5}px`;
+                break;
+            case 'ArrowRight':
+                style.left = `${parseInt(window.getComputedStyle(bird).left) + 5}px`;
+                break;
+        }
+    })
+}
 
-bird.addEventListener('keydown', (event) => {
-    //const { style } = bird;
-    console.log("here is :", style);
-    switch (event.code) {
-        case 'ArrowUp':
-            style.top = `${parseInt(bird.style.top) - 5}px`;
-            break;
-        case 'ArrowDown':
-            style.top = `${parseInt(bird.style.top) + 5}px`;
-            break;
-        case 'ArrowLeft':
-            style.top = `${parseInt(bird.style.left) - 5}px`;
-            break;
-        case 'ArrowRight':
-            style.top = `${parseInt(bird.style.left) + 5}px`;
-            break;
-    }
-})
 
 
 const collision = () => {

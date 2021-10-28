@@ -40,10 +40,10 @@
   padding: 2px;
   width: 100px;
 }
-
 #myBird {
   width: 120px;
   height: auto;
   position: absolute;
   top: 200px;
+  left: 30px;
 }

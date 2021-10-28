@@ -12,3 +12,6 @@
   padding: 2px;
   width: 100px;
 }
+.button .score {
+  background-color: rgba(247, 7, 247, 0.829);
+}
