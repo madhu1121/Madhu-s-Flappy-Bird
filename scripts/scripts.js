@@ -19,34 +19,34 @@ const loadGame = () => {
     gameSound.play();
 
     // setting coordinates of bird uptower and downtower
-        //120 is bird's width. Divide it by 2 to get mid width
-        //512 is game area
-        birdCordinates = {
-            x: bird.getBoundingClientRect().left,
-            y: bird.getBoundingClientRect().top,
-            y_bottom: bird.getBoundingClientRect().bottom,
-            center_x: bird.getBoundingClientRect().left + 120 / 2,
-           // down_y: 512 - bird.getBoundingClientRect().top 
-           down_y: bird.getBoundingClientRect().bottom-60
-        }
-    
-        console.log("birdCordinates", birdCordinates);
-    
-        upTowerCordinates = {
-            x: upTower.getBoundingClientRect().left,
-            y: upTower.getBoundingClientRect().bottom,
-        }
-    
-        console.log("upTowerCordinates", upTowerCordinates);
-    
-        downTowerCordinates = {
-            x: downTower.getBoundingClientRect().left,
-            y: downTower.getBoundingClientRect().top,
-        }
-    
+    //120 is bird's width. Divide it by 2 to get mid width
+    //512 is game area
+    birdCordinates = {
+        x: bird.getBoundingClientRect().left,
+        y: bird.getBoundingClientRect().top,
+        y_bottom: bird.getBoundingClientRect().bottom,
+        center_x: bird.getBoundingClientRect().left + 120 / 2,
+        // down_y: 512 - bird.getBoundingClientRect().top 
+        down_y: bird.getBoundingClientRect().bottom - 60
+    }
+
+    console.log("birdCordinates", birdCordinates);
+
+    upTowerCordinates = {
+        x: upTower.getBoundingClientRect().left,
+        y: upTower.getBoundingClientRect().bottom,
+    }
+
+    console.log("upTowerCordinates", upTowerCordinates);
+
+    downTowerCordinates = {
+        x: downTower.getBoundingClientRect().left,
+        y: downTower.getBoundingClientRect().top,
+    }
+
     console.log("downTowerCordinates", downTowerCordinates);
 
-   //generating random height of div
+    //generating random height of div
     leftPosition = leftPosition - 50;
     upTower.style.left = `${leftPosition}px`;
     upTower.style.height = `${Math.random() * 300}px`;
@@ -58,7 +58,7 @@ const loadGame = () => {
         leftPosition = 950;
     }
 
-//increasing the couter for score
+    //increasing the couter for score
     counter = counter + 50;
 
     scoreBoard.innerHTML = counter;
