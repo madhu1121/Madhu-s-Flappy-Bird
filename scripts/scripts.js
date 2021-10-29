@@ -12,11 +12,13 @@ let upTowerCordinates;
 let downTowerCordinates;
 
 
-//generating random height of div
+
 const loadGame = () => {
+    //Adding sound
     let gameSound = new Audio("../images/retro.wav");
     gameSound.play();
 
+    // setting coordinates of bird uptower and downtower
         //120 is bird's width. Divide it by 2 to get mid width
         //512 is game area
         birdCordinates = {
@@ -44,7 +46,7 @@ const loadGame = () => {
     
     console.log("downTowerCordinates", downTowerCordinates);
 
-
+   //generating random height of div
     leftPosition = leftPosition - 50;
     upTower.style.left = `${leftPosition}px`;
     upTower.style.height = `${Math.random() * 300}px`;
@@ -56,12 +58,13 @@ const loadGame = () => {
         leftPosition = 950;
     }
 
-
+//increasing the couter for score
     counter = counter + 50;
 
     scoreBoard.innerHTML = counter;
     collision();
 
+    //dynamically creating div and moving it with frame
     // let diveleUp = document.createElement("div");
     // diveleUp.className = "upTower";
     // diveleUp.style.cssText = 'width: 50px;position: absolute;left: 950px;background: green;';
@@ -78,11 +81,10 @@ const loadGame = () => {
     // diveledown.style.height = Math.random() * 200 + 'px';
     // diveledown.className = "downTower";
 
+    //to make the requestAnimationFrame slow
     gameID = setTimeout(() => {
         window.requestAnimationFrame(loadGame);
     }, 200);
-
-    console.log("gameID" + gameID);
     // return gameID;
     //gameID = window.requestAnimationFrame(loadGame);
 }
@@ -99,7 +101,6 @@ const stopGame = () => {
     //     cancelAnimationFrame(gameID);
     // }, 400);
     // cancelAnimationFrame(gameID);
-    console.log("stop one", gameID);
     clearTimeout(gameID);
     console.log("Game Stopped");
     counter = 0;
