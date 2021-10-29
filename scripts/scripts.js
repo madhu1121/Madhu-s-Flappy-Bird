@@ -22,8 +22,10 @@ const loadGame = () => {
         birdCordinates = {
             x: bird.getBoundingClientRect().left,
             y: bird.getBoundingClientRect().top,
+            y_bottom: bird.getBoundingClientRect().bottom,
             center_x: bird.getBoundingClientRect().left + 120 / 2,
-            down_y: 512 - bird.getBoundingClientRect().top 
+           // down_y: 512 - bird.getBoundingClientRect().top 
+           down_y: bird.getBoundingClientRect().bottom-60
         }
     
         console.log("birdCordinates", birdCordinates);
@@ -47,7 +49,6 @@ const loadGame = () => {
     upTower.style.left = `${leftPosition}px`;
     upTower.style.height = `${Math.random() * 300}px`;
 
-    leftPosition = leftPosition - 50;
     downTower.style.left = `${leftPosition}px`;
     downTower.style.height = `${Math.random() * 300}px`;
 
@@ -79,7 +80,7 @@ const loadGame = () => {
 
     gameID = setTimeout(() => {
         window.requestAnimationFrame(loadGame);
-    }, 400);
+    }, 200);
 
     console.log("gameID" + gameID);
     // return gameID;
@@ -178,11 +179,23 @@ const collision = () => {
     // console.log("x_collide", x_collide);
     // console.log("y_collide", y_collide);
 
+    // console.log("diff y", upTowerCordinates.y - birdCordinates.down_y);
+    // console.log("diff x", birdCordinates.center_x - upTowerCordinates.x);
+    // //birdCordinates.center_x - upTowerCordinates.x <= 50 && birdCordinates.center_x - upTowerCordinates.x >= -50 && 
+
+    // if ((birdCordinates.center_x - upTowerCordinates.x <= 50 && birdCordinates.center_x - upTowerCordinates.x >= -50 && upTowerCordinates.y - birdCordinates.down_y <= 3 && upTowerCordinates.y - birdCordinates.down_y >= -3) || birdCordinates.x < 105 || birdCordinates.x > 1000 || birdCordinates.y < 80 || birdCordinates.y > 500) {
+    //     console.log("here is my collide");
+    //     console.log("GAME OVER! SCORE IS : " + counter);
+    //     alert("Your Score is : " + counter)
+    //     location.href = 'http://127.0.0.1:5500/index.html';
+    //     counter = 0;
+    // }
+
     console.log("diff y", upTowerCordinates.y - birdCordinates.down_y);
     console.log("diff x", birdCordinates.center_x - upTowerCordinates.x);
     //birdCordinates.center_x - upTowerCordinates.x <= 50 && birdCordinates.center_x - upTowerCordinates.x >= -50 && 
 
-    if ((birdCordinates.center_x - upTowerCordinates.x <= 50 && birdCordinates.center_x - upTowerCordinates.x >= -50 && upTowerCordinates.y - birdCordinates.down_y <= 3 && upTowerCordinates.y - birdCordinates.down_y >= -3) || birdCordinates.x < 105 || birdCordinates.x > 1000 || birdCordinates.y < 80 || birdCordinates.y > 500) {
+    if (((birdCordinates.center_x - upTowerCordinates.x <= 10 && birdCordinates.center_x - upTowerCordinates.x >= -120) && (upTowerCordinates.y - birdCordinates.down_y <= 3 && upTowerCordinates.y - birdCordinates.down_y >= -45)) || ((birdCordinates.y_bottom < upTowerCordinates.y) && (birdCordinates.center_x - upTowerCordinates.x <= 10 && birdCordinates.center_x - upTowerCordinates.x >= -80)) || ((birdCordinates.y_bottom > downTowerCordinates.y) && (birdCordinates.center_x - downTowerCordinates.x <= 10 && birdCordinates.center_x - downTowerCordinates.x >= -80)) || birdCordinates.x < 105 || birdCordinates.x > 1000 || birdCordinates.y < 80 || birdCordinates.y > 500) {
         console.log("here is my collide");
         console.log("GAME OVER! SCORE IS : " + counter);
         alert("Your Score is : " + counter)
